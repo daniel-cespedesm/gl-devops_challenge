@@ -61,9 +61,14 @@ function setup_terraform () {
 
 function setup_ssh_keys () {
   /bin/ssh-keygen -f ~/.ssh/fruit -q -N ""
-  /bin/chmod 0600 ./.ssh/fruit*
+  /bin/chmod 0600 ~/.ssh/fruit*
   /bin/ssh-add ~/.ssh/fruit
   /bin/ssh-add -l
+  $ECHO "It is strongly recommended that you add the below pub key to your gitgub repository";
+  $ECHO "######################## PUB KEY ########################"
+  /bin/cat ~/.ssh/fruit.pub
+  $ECHO "#########################################################"
+  /bin/read -p "Press enter to continue"
 }
 
 function setup_terransible (){
