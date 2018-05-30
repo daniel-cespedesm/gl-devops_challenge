@@ -29,7 +29,7 @@ done
 
 UPDATE=$(echo $UPDATE | tr '[:lower:]' '[:upper:]')
 
-if [ $UPDATE != "YES" &&  $UPDATE != "NO" ]
+if [ ($UPDATE != "YES") &&  ($UPDATE != "NO") ]
 then
   $ECHO "$UPDATE value is not valid for flag -u|--update, exiting.";
   exit 2;
