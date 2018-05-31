@@ -10,6 +10,7 @@
     - name: Correct Java version selected
       alternatives:
         name: java
+        link: /usr/bin/java
         path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-7.b10.37.amzn1.x86_64/jre/bin/java
     - name: Get Jenkins Repository added
       get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
