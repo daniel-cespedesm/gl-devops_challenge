@@ -59,9 +59,10 @@ function setup_terraform () {
   $TERRAFORM --version;
 }
 
-function setup_ssh_keys () {
+function setup_ssh_keys () {}
   /bin/ssh-keygen -f ~/.ssh/fruit -q -N ""
   /bin/chmod 0600 ~/.ssh/fruit*
+  eval `ssh-agent -s`
   /bin/ssh-add ~/.ssh/fruit
   /bin/ssh-add -l
   $ECHO "It is strongly recommended that you add the below pub key to your gitgub repository";
@@ -72,6 +73,8 @@ function setup_ssh_keys () {
 }
 
 function setup_terransible (){
+  $ECHO "Waiting 10 seconds for ssh_key to replicate"
+  /bin/wait 10s;
   /bin/git clone $GITREPO
 }
 
