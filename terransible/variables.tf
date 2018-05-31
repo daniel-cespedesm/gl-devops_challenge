@@ -7,7 +7,6 @@ variable "cidrs" {
   type = "map"
 }
 
-variable "localip" {}
 variable "ec2_instance_type" {}
 variable "ec2_ami" {}
 variable "public_key_path" {}
