@@ -7,8 +7,8 @@ provider "aws" {
 
 resource "aws_vpc" "jenkins-hygieia_vpc" {
   cidr_block           = "${var.vpc_cidr}"
-  enable_dns_hostnames = false
-  enable_dns_support   = false
+/*  enable_dns_hostnames = false
+  enable_dns_support   = false*/
 
   tags {
     Name = "jenkins-hygieia_vpc"
@@ -40,13 +40,13 @@ resource "aws_route_table" "jenkins-hygieia_public_rt" {
   }
 }
 
-resource "aws_default_route_table" "jenkins-hygieia_private_rt" {
+/*resource "aws_default_route_table" "jenkins-hygieia_private_rt" {
   default_route_table_id = "${aws_vpc.jenkins-hygieia_vpc.default_route_table_id}"
 
   tags {
     Name = "jenkins-hygieia_private"
   }
-}
+}*/
 
 # Subnets declaration
 
@@ -61,7 +61,7 @@ resource "aws_subnet" "jenkins-hygieia_public1_subnet" {
   }
 }
 
-resource "aws_subnet" "jenkins-hygieia_private1_subnet" {
+/*resource "aws_subnet" "jenkins-hygieia_private1_subnet" {
   vpc_id                  = "${aws_vpc.jenkins-hygieia_vpc.id}"
   cidr_block              = "${var.cidrs["private1"]}"
   map_public_ip_on_launch = false
@@ -70,7 +70,7 @@ resource "aws_subnet" "jenkins-hygieia_private1_subnet" {
   tags {
     Name = "jenkins-hygieia_private1"
   }
-}
+}*/
 
 # Subnet asociations
 
@@ -89,7 +89,7 @@ resource "aws_security_group" "jenkins-hygieia_public_sg" {
   #jenkins-hygieia
 
   ingress {
-    from_port   = 0
+    from_port   = 8081
     to_port     = 8081
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -98,8 +98,17 @@ resource "aws_security_group" "jenkins-hygieia_public_sg" {
   #Hygieia
 
   ingress {
-    from_port   = 0
+    from_port   = 8080
     to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  #Ssh
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -112,7 +121,7 @@ resource "aws_security_group" "jenkins-hygieia_public_sg" {
   }
 }
 
-resource "aws_security_group" "jenkins-hygieia_private_sg" {
+/*resource "aws_security_group" "jenkins-hygieia_private_sg" {
   name        = "jenkins-hygieia_private_sg"
   description = "Used for access to private instances"
   vpc_id      = "${aws_vpc.jenkins-hygieia_vpc.id}"
@@ -131,7 +140,7 @@ resource "aws_security_group" "jenkins-hygieia_private_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
+}*/
 
 #------ Golden ami ------
 
@@ -151,7 +160,7 @@ resource "aws_instance" "jenkins-hygieia_ec2" {
   }
 
   key_name               = "${aws_key_pair.jenkins-hygieia_auth.id}"
-  vpc_security_group_ids = ["${aws_security_group.jenkins-hygieia_private_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.jenkins-hygieia_public1_sg.id}"]
   subnet_id              = "${aws_subnet.jenkins-hygieia_public1_subnet.id}"
 
   provisioner "local-exec" {
