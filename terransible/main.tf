@@ -164,6 +164,15 @@ resource "aws_instance" "jenkins-hygieia_ec2" {
   subnet_id              = "${aws_subnet.jenkins-hygieia_public1_subnet.id}"
 
   provisioner "local-exec" {
-    command = "aws ec2 wait-status-ok --instance-ids ${aws_instance.jenkins-hygieia_ec2.id} --profile ${var.aws_profile} && ansible-playbook -i ${aws_instance.jenkins-hygieia_ec2.public_ip}, jenkins-hygieia.yml"
+    command = <<EOD
+cat <<EOF > aws_hosts
+[jenkins]
+${aws_instance.jenkins-hygieia_ec2.public_ip}
+EOF
+EOD
+  }
+
+  provisioner "local-exec" {
+    command = "aws ec2 wait-status-ok --instance-ids ${aws_instance.jenkins-hygieia_ec2.id} --profile ${var.aws_profile} && ansible-playbook -i aws_hosts jenkins.yml"
   }
 }
