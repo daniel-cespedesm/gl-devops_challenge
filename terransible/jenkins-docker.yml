@@ -32,7 +32,7 @@
     - name: Update OS
       yum: name=* state=latest
     - name: Remove any running docker instance
-      yum: name={{ items }} state=removed
+      yum: name={{ item }} state=removed
       with_items:
         - docker
         - docker-client
