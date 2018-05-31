@@ -4,8 +4,10 @@
   remote_user: ec2-user
   tasks:
     - name: Get Jenkins Repository added
-      command: "wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key"
-    - name: Get Jenkins Repository added
+      get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
+    - name: Import jenkins rpm key
+      command: "rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key"
+    - name: Install Jenkins
       yum: name=jenkins state=present
     - name: Disable repo for possible updates updates
       command: "yum-config-manager --disable jenkins"
