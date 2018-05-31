@@ -3,6 +3,14 @@
   become: yes
   remote_user: ec2-user
   tasks:
+    - name: Update OS
+      yum: name=* state=latest
+    - name: Install Java 8
+      yum: name=java-1.8.0-openjdk state=latest
+    - name: Correct Java version selected
+      alternatives:
+        name: java
+        path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-7.b10.37.amzn1.x86_64/jre/bin/java
     - name: Get Jenkins Repository added
       get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
     - name: Import jenkins rpm key
