@@ -151,8 +151,7 @@ resource "aws_instance" "jenkins_ec2" {
   }
 
   key_name               = "${aws_key_pair.jenkins_auth.id}"
-  vpc_security_group_ids = ["${aws_security_group.jenkins_ec2_sg.id}"]
-  iam_instance_profile   = "${aws_iam_instance_profile.s3_access_profile.id}"
+  vpc_security_group_ids = ["${aws_security_group.jenkins_private_sg.id}"]
   subnet_id              = "${aws_subnet.jenkins_public1_subnet.id}"
 
   provisioner "local-exec" {
