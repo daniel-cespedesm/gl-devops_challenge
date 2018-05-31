@@ -20,7 +20,8 @@
       yum: name=jenkins state=present
     - name: Disable repo for possible updates updates
       command: "yum-config-manager --disable jenkins"
+    - name: Change Jenkins default port from 8080 to 8081
+      ini_file: dest=/etc/sysconfig/jenkins section=DEFAULT option=JENKINS_PORT value=8081 backup=yes
+      tags: configuration 
     - name: Make sure Jenkins is started now and at boot.
       service: name=jenkins state=started enabled=yes
-    - name: Get port 8080 status
-      command: "netstat -tulpn | grep 8080"
