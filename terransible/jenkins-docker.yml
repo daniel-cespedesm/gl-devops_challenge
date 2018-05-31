@@ -1,0 +1,9 @@
+---
+- hosts: jenkins
+  become: yes
+  remote_user: ec2-user
+  tasks:
+    - include: {{ item }}
+      with_items:
+        - hygieia.yml
+        - jenkins.yml

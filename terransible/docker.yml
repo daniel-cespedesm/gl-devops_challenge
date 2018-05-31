@@ -1,0 +1,32 @@
+---
+- hosts: jenkins
+  become: yes
+  remote_user: ec2-user
+  tasks:
+    - name: Update OS
+      yum: name=* state=latest
+    - name: Remove any running docker instance
+      yum: name={{ items }} state=removed
+      with_items:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logrotate
+        - docker-logrotate
+        - docker-selinux
+        - docker-engine-selinux
+        - docker-engine
+    - name: Installing Docker dependencies
+      yum: name={{ item }} state=latest
+      with_items:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+    - name: Add docker Repository
+      command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    - name: Install Docker
+      yum: name=docker-ce state=latest
+    - name: Make sure docker is started now and at boot.
+      service: name=docker state=started enabled=yes
