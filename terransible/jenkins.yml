@@ -14,8 +14,9 @@
         path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-7.b10.37.amzn1.x86_64/jre/bin/java
     - name: Get Jenkins Repository added
       get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
-    - name: Import jenkins rpm key
-      command: "rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key"
+    - rpm_key:
+        state: present
+        key: http://pkg.jenkins.io/redhat-stable/jenkins.io.key
     - name: Install Jenkins
       yum: name=jenkins state=present
     - name: Disable repo for possible updates updates
@@ -28,3 +29,7 @@
         backrefs: yes
     - name: Make sure Jenkins is started now and at boot.
       service: name=jenkins state=started enabled=yes
+    - name: Echo jenkins secret first passwd
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: secret_result
+    - debug: msg={{ secret_result.stdout }}
