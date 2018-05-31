@@ -5,6 +5,6 @@ cidrs = {
         public1 = "10.0.0.0/25"
 }
 ec2_instance_type = "t2.micro"
-ec2_ami = "ami-b73b63a0"
+ec2_ami = "ami-6871a115"
 public_key_path = "/root/.ssh/fruit.pub"
 key_name = "fruit"

@@ -173,6 +173,6 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins-hygieia_ec2.id} --profile ${var.aws_profile} && ansible-playbook -i aws_hosts jenkins.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins-hygieia_ec2.id} --profile ${var.aws_profile} && ansible-playbook -i aws_hosts jenkins-docker.yml"
   }
 }
