@@ -3,10 +3,6 @@
   become: yes
   remote_user: ec2-user
   tasks:
-    - name: Download Java
-      command: "wget --no-cookies --no-check-certificate --header \"Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie\" \"http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.rpm\" -P /tmp/"
-    - name: Install Java.
-      command: "rpm -Uvh /tmp/jdk-8u171-linux-x64.rpm"
     - name: Get Jenkins Repository added
       command: "wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key"
     - name: Get Jenkins Repository added
