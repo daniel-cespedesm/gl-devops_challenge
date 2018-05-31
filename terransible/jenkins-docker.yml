@@ -11,7 +11,7 @@
       alternatives:
         name: java
         link: /usr/bin/java
-        path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171*/jre/bin/java
+        path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
     - name: Get Jenkins Repository added
       get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
     - rpm_key:
