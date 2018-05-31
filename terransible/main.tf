@@ -160,7 +160,7 @@ resource "aws_instance" "jenkins-hygieia_ec2" {
   }
 
   key_name               = "${aws_key_pair.jenkins-hygieia_auth.id}"
-  vpc_security_group_ids = ["${aws_security_group.jenkins-hygieia_public1_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.jenkins-hygieia_public_sg.id}"]
   subnet_id              = "${aws_subnet.jenkins-hygieia_public1_subnet.id}"
 
   provisioner "local-exec" {
