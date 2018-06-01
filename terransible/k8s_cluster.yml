@@ -51,6 +51,7 @@
       systemd: daemon_reload=yes
     - name: Make sure Kubelet is started now and at boot.
       service: name=kubelet state=started enabled=yes
+      ignore_errors: yes
     - name: Create K8s kernel lines
       sysctl:
         name: net.bridge.bridge-nf-call-iptables
@@ -60,3 +61,9 @@
         reload: yes
     - name: Init K8s cluster
       command: kubeadm init
+      ignore_errors: yes
+    - name: Download Kompose
+      get_url:
+        url: https://github.com/kubernetes/kompose/releases/download/v1.13.0/kompose-linux-amd64
+        dest: /usr/local/bin/kompose
+        mode: 0755
