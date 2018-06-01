@@ -68,6 +68,8 @@
         url: https://github.com/kubernetes/kompose/releases/download/v1.13.0/kompose-linux-amd64
         dest: /usr/local/bin/kompose
         mode: 0755
+    - name: Adds mvn folder
+      file: path=/usr/lib/mvn/ state=directory
     - name: Gets Maven installed
       unarchive:
         src: http://www-us.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.tar.gz
