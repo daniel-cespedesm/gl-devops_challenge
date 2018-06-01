@@ -80,3 +80,8 @@
         src: /usr/lib/mvn/apache-maven-3.5.3/bin/mvn
         dest: /usr/bin/mvn
         state: link
+    - name: Make sure correct Java version selected
+      alternatives:
+        name: java
+        link: /usr/bin/java
+        path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
