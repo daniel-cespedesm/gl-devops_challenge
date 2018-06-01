@@ -3,7 +3,6 @@
 function wake_up() {
   eval `ssh-agent -s`
   /bin/ssh-add ~/.ssh/fruit
-  /bin/ssh-add -l
 }
 
 /bin/ssh-add -l 2&>1
