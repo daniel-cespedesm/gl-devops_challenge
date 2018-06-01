@@ -32,4 +32,4 @@
     - name: Make sure Jenkins home exists
       file: path=/var/jenkins_home state=directory
     - name: Run Jenkins instance
-      command: docker run -d -u root -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home jenkins
+      command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home jenkins
