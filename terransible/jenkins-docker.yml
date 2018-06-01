@@ -34,6 +34,7 @@
       register: containers_ids
     - name: Kills docker containers if any
       command: docker kill {{ containers_ids.stdout }}
+      ignore_errors: yes
     - name: Pull Jenkins docker image
       command: docker pull dacesmo/jenkins
     - name: Make sure Jenkins home exists
