@@ -5,29 +5,23 @@
   tasks:
     - name: Makes sure OS is up to date
       yum:  name=* state=latest
-    - name: Makes sure Java 8 is present
-      yum: name=java-1.8.0-openjdk state=latest
-    - name: Make sure correct Java version selected
-      alternatives:
-        name: java
-        link: /usr/bin/java
-        path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
-    - name: Docker dependencies
+    - name: Docker dependencies and others
       yum: name={{ item }} state=latest
       with_items:
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
         - git
+        - vim
     - name: Docker repo
       get_url: url=https://download.docker.com/linux/centos/docker-ce.repo dest=/etc/yum.repos.d/docker.repo force=yes
     - name: Makes sure Docker is at its latest RHEL compatible version
       command: yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos.x86_64
       args:
         warn: no
-    - name: Make sure Docker is started now and at boot.
+    - name: Docker is started now and at boot.
       service: name=docker state=started enabled=yes
-    - name: Remove docker repo
+    - name: Removes docker repo
       file: path=/etc/yum.repos.d/docker.repo state=absent
     - name: get docker running container ids
       command: docker ps -q
@@ -37,9 +31,9 @@
       ignore_errors: yes
     - name: Pull Jenkins docker image
       command: docker pull dacesmo/jenkins
-    - name: Make sure Jenkins home exists
+    - name: Jenkins home exists
       file: path=/var/jenkins_home state=directory
-    - name: Make sure K8s repo folder exists
+    - name: K8s repo folder exists
       file: path=/var/opt/k8s state=directory
     - name: Run Jenkins instance
       command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home dacesmo/jenkins
@@ -61,12 +55,14 @@
         - kubelet
         - kubeadm
         - kubectl
-    - name: Changing default kubelet cgroup driver from systemd to cgroups
+    - name: Changing default kubelet cgroup driver from systemd to cgroupfs
       lineinfile:
         dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
         regexp: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=systemd"'
-        line: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroups"'
+        line: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs"'
         backrefs: yes
+    - name: Reread Kubelet configs
+      systemd: daemon_reload=yes
     - name: Make sure Kubelet is started now and at boot.
       service: name=kubelet state=started enabled=yes
     - name: Create K8s kernel lines
