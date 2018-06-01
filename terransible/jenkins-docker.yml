@@ -27,6 +27,8 @@
         warn: no
     - name: Make sure Docker is started now and at boot.
       service: name=docker state=started enabled=yes
+    - name: Remove docker repo
+      file: path=/etc/yum.repos.d/docker.repo state=absent
     - name: Pull Jenkins docker image
       command: docker pull dacesmo/jenkins
     - name: Make sure Jenkins home exists
