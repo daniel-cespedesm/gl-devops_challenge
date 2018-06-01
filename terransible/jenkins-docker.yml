@@ -28,10 +28,7 @@
         - device-mapper-persistent-data
         - lvm2
     - name: Docker repo
-      yum_repository:
-        name: docker
-        description: docker repo
-        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+      get_url: url=https://download.docker.com/linux/centos/docker-ce.repo dest=/etc/yum.repos.d/docker.repo force=yes
     - name: Makes sure Docker is at its latest RHEL compatible version
       command: yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos.x86_64
       args:
