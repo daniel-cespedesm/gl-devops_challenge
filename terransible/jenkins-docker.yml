@@ -59,13 +59,10 @@
       service: name=kubelet state=started enabled=yes
     - name: Create K8s kernel lines
       sysctl:
-        name: {{ item }}
+        name: net.bridge.bridge-nf-call-iptables
         value: 1
         sysctl_set: yes
         state: present
         reload: yes
-        with_items:
-          - net.bridge.bridge-nf-call-ip6tables
-          - net.bridge.bridge-nf-call-iptables
     - name: Init K8s cluster
       command: kubeadm init
