@@ -47,6 +47,7 @@
       git:
         repo: https://github.com/kubernetes/kubernetes
         dest: /var/opt/k8s
+        clone: yes
     - name: Install K8s
       make:
         chdir: /home/ubuntu/cool-project
