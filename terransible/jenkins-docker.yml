@@ -29,8 +29,11 @@
       service: name=docker state=started enabled=yes
     - name: Remove docker repo
       file: path=/etc/yum.repos.d/docker.repo state=absent
+    - name: get docker running container ids
+      command: docker ps -q
+      register: containers_ids
     - name: Kills docker containers if any
-      command: docker kill $(docker ps -q)
+      command: docker kill {{ containers_ids.stdout }}
     - name: Pull Jenkins docker image
       command: docker pull dacesmo/jenkins
     - name: Make sure Jenkins home exists
