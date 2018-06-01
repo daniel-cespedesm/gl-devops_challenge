@@ -44,12 +44,19 @@
       file: path=/var/opt/k8s state=directory
     - name: Run Jenkins instance
       command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home dacesmo/jenkins
-    - name: Makes sure K8s
-      git:
-        repo: https://github.com/kubernetes/kubernetes
-        dest: /var/opt/k8s
-        clone: yes
-    - name: Install K8s
-      make:
-        chdir: /home/ubuntu/cool-project
-        target: quick-release
+    - name: Add k8s repo
+      yum_repository:
+        name: K8s
+        description: Kubernetes repository
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+        gpgcheck: yes
+        repo_gpgcheck: yes
+    - name: Adds K8s kernel config net.bridge.bridge-nf-call-ip6tables = 1
+      lineinfile:
+        dest: /etc/sysctl.d/k8s.conf
+        line: 'net.bridge.bridge-nf-call-ip6tables = 1'
+    - name: Adds K8s kernel config net.bridge.bridge-nf-call-iptables = 1
+      lineinfile:
+        dest: /etc/sysctl.d/k8s.conf
+        line: 'net.bridge.bridge-nf-call-iptables = 1'
