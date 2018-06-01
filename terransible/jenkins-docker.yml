@@ -25,3 +25,11 @@
       command: yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos.x86_64
       args:
         warn: no
+    - name: Make sure Docker is started now and at boot.
+      service: name=docker state=started enabled=yes
+    - name: Pull Jenkins docker image
+      command: docker pull jenkins
+    - name: Make sure Jenkins home exists
+      file: path=/var/jenkins_home state=directory
+    - name: Run Docker instance
+      command: docker run -d -p 8081:8080 -v /var/jenkins_home:/var/jenkins_home -t jenkins
