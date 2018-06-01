@@ -3,8 +3,8 @@
   become: yes
   remote_user: ec2-user
   tasks:
-    - name: Removing any possible docker conflict package
-      yum: name={{ item }} state:absent
+    - name: Removing any possible Docker conflict package
+      yum: name={{ item }} state=absent
       with_items:
         - docker
         - docker-common
@@ -21,3 +21,5 @@
         path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
     - name: Install Docker latest RHEL compatible version
       command: yum install -y --setopt=obsoletes=0 docker-ce-17.03.1.ce-1.el7.centos.x86_64
+      args:
+        warn: no
