@@ -12,47 +12,7 @@
         name: java
         link: /usr/bin/java
         path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
-    - name: Get Jenkins Repository added
-      get_url: url=https://pkg.jenkins.io/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo force=yes
-    - rpm_key:
-        state: present
-        key: http://pkg.jenkins.io/redhat-stable/jenkins.io.key
-    - name: Install Jenkins
-      yum: name=jenkins state=present
-    - name: Disable repo for possible updates updates
-      command: "yum-config-manager --disable jenkins"
-    - name: Change Jenkins default port from 8080 to 8081
-      lineinfile:
-        dest: /etc/sysconfig/jenkins
-        regexp: 'JENKINS_PORT="8080"'
-        line: 'JENKINS_PORT="8081"'
-        backrefs: yes
-    - name: Make sure Jenkins is started now and at boot.
-      service: name=jenkins state=started enabled=yes
-    - name: Update OS
-      yum: name=* state=latest
-    - name: Remove any running docker instance
-      yum: name={{ item }} state=removed
-      with_items:
-        - docker
-        - docker-client
-        - docker-client-latest
-        - docker-common
-        - docker-latest
-        - docker-latest-logrotate
-        - docker-logrotate
-        - docker-selinux
-        - docker-engine-selinux
-        - docker-engine
     - name: Installing Docker dependencies
       yum: name={{ item }} state=latest
       with_items:
-        - yum-utils
-        - device-mapper-persistent-data
-        - lvm2
-    - name: Add docker Repository
-      command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-    - name: Install Docker
-      yum: name=docker-ce state=latest
-    - name: Make sure docker is started now and at boot.
-      service: name=docker state=started enabled=yes
+        - docker
