@@ -3,15 +3,6 @@
   become: yes
   remote_user: ec2-user
   tasks:
-    - name: Making sure there aren't any possible Docker conflict packages
-      yum: name={{ item }} state=absent
-      with_items:
-        - docker
-        - docker-ce
-        - docker-ce-selinux
-        - docker-common
-        - docker-selinux
-        - docker-engine-selinux
     - name: Makes sure OS is up to date
       yum:  name=* state=latest
     - name: Makes sure Java 8 is present
@@ -52,11 +43,9 @@
         gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
         gpgcheck: yes
         repo_gpgcheck: yes
-    - name: Adds K8s kernel config net.bridge.bridge-nf-call-ip6tables = 1
-      lineinfile:
+    - name: Create K8s kernel lines
+      copy:
         dest: /etc/sysctl.d/k8s.conf
-        line: 'net.bridge.bridge-nf-call-ip6tables = 1'
-    - name: Adds K8s kernel config net.bridge.bridge-nf-call-iptables = 1
-      lineinfile:
-        dest: /etc/sysctl.d/k8s.conf
-        line: 'net.bridge.bridge-nf-call-iptables = 1'
+        content: |
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.bridge.bridge-nf-call-iptables = 1
