@@ -13,6 +13,7 @@
         - lvm2
         - git
         - vim
+        - java
     - name: Docker repo
       get_url: url=https://download.docker.com/linux/centos/docker-ce.repo dest=/etc/yum.repos.d/docker.repo force=yes
     - name: Makes sure Docker is at its latest RHEL compatible version
@@ -67,3 +68,13 @@
         url: https://github.com/kubernetes/kompose/releases/download/v1.13.0/kompose-linux-amd64
         dest: /usr/local/bin/kompose
         mode: 0755
+    - name: Gets Maven installed
+      unarchive:
+        src: http://www-us.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.tar.gz
+        dest: /usr/lib/mvn/
+        remote_src: yes
+    - name: Make mvn executable
+      file:
+        src: /usr/lib/mvn/apache-maven-3.5.3/bin/mvn
+        dest: /usr/bin/mvn
+        state: link
