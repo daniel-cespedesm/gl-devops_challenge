@@ -167,11 +167,9 @@ resource "aws_instance" "jenkins_hygieia_ec2" {
 
   provisioner "local-exec" {
     command = <<EOD
-cat <<EOF > aws_hosts
+cat <<EOF >> aws_hosts
 [jenkins]
 ${aws_instance.jenkins_hygieia_ec2.public_ip}
-[k8s]
-${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
 EOD
   }
@@ -195,16 +193,14 @@ resource "aws_instance" "k8s_cluster_ec2" {
   vpc_security_group_ids = ["${aws_security_group.jenkins_hygieia_env_public_sg.id}"]
   subnet_id              = "${aws_subnet.jenkins_hygieia_env_public1_subnet.id}"
 
-  /*provisioner "local-exec" {
+  provisioner "local-exec" {
     command = <<EOD
-cat <<EOF > aws_hosts
-[jenkins]
-${aws_instance.jenkins_hygieia_ec2.public_ip}
+cat <<EOF >> aws_hosts
 [k8s]
 ${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
 EOD
-  }*/
+  }
 
   provisioner "local-exec" {
     command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.k8s_cluster_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts k8s_cluster.yml"
