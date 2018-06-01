@@ -11,7 +11,6 @@
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
-        - git
         - vim
     - name: Docker repo
       get_url: url=https://download.docker.com/linux/centos/docker-ce.repo dest=/etc/yum.repos.d/docker.repo force=yes
@@ -33,44 +32,5 @@
       command: docker pull dacesmo/jenkins
     - name: Jenkins home exists
       file: path=/var/jenkins_home state=directory
-    - name: K8s repo folder exists
-      file: path=/var/opt/k8s state=directory
     - name: Run Jenkins instance
       command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home dacesmo/jenkins
-    - name: Add k8s repo
-      yum_repository:
-        name: K8s
-        description: Kubernetes repository
-        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-        gpgcheck: yes
-        repo_gpgcheck: yes
-    - name: Set selinux permissive
-      selinux:
-        policy: targeted
-        state: permissive
-    - name: Install K8s components
-      yum: name={{ item }} state=latest
-      with_items:
-        - kubelet
-        - kubeadm
-        - kubectl
-    - name: Changing default kubelet cgroup driver from systemd to cgroupfs
-      lineinfile:
-        dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-        regexp: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=systemd"'
-        line: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs"'
-        backrefs: yes
-    - name: Reread Kubelet configs
-      systemd: daemon_reload=yes
-    - name: Make sure Kubelet is started now and at boot.
-      service: name=kubelet state=started enabled=yes
-    - name: Create K8s kernel lines
-      sysctl:
-        name: net.bridge.bridge-nf-call-iptables
-        value: 1
-        sysctl_set: yes
-        state: present
-        reload: yes
-    - name: Init K8s cluster
-      command: kubeadm init

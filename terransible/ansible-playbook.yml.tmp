@@ -109,3 +109,18 @@
               lineinfile:
                 dest: /etc/sysctl.d/k8s.conf
                 line: 'net.bridge.bridge-nf-call-iptables = 1'
+
+
+
+
+
+- name: Makes sure Java 8 is present
+  yum: name=java-1.8.0-openjdk state=latest
+- name: Make sure correct Java version selected
+  alternatives:
+    name: java
+    link: /usr/bin/java
+    path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
+
+
+    
