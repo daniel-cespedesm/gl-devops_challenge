@@ -61,6 +61,12 @@
         - kubelet
         - kubeadm
         - kubectl
+    - name: Changing default kubelet cgroup driver from systemd to cgroups
+      lineinfile:
+        dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+        regexp: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=systemd"'
+        line: 'Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroups"'
+        backrefs: yes
     - name: Make sure Kubelet is started now and at boot.
       service: name=kubelet state=started enabled=yes
     - name: Create K8s kernel lines
