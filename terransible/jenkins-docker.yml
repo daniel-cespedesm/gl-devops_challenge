@@ -22,11 +22,11 @@
         link: /usr/bin/java
         path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/bin/java
     - name: Docker dependencies
-        yum:  name={{ item }} state=latest
-        with_items:
-          - yum-utils
-          - device-mapper-persistent-data
-          - lvm2
+      yum: name={{ item }} state=latest
+      with_items:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
     - name: Docker repo
       yum_repository:
         name: docker
