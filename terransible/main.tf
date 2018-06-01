@@ -195,7 +195,7 @@ resource "aws_instance" "k8s_cluster_ec2" {
 
   provisioner "local-exec" {
     command = <<EOD
-cat <<EOF > aws_hosts
+cat <<EOF >> aws_hosts
 [k8s]
 ${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
