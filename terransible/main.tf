@@ -13,6 +13,7 @@ resource "aws_vpc" "jenkins_hygieia_env_vpc" {
   tags {
     Name = "jenkins_hygieia_env_vpc"
   }
+
 }
 
 #internet gateway
