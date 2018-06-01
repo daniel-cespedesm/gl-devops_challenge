@@ -170,6 +170,8 @@ resource "aws_instance" "jenkins_hygieia_ec2" {
 cat <<EOF > aws_hosts
 [jenkins]
 ${aws_instance.jenkins_hygieia_ec2.public_ip}
+[k8s]
+${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
 EOD
   }
@@ -195,7 +197,9 @@ resource "aws_instance" "k8s_cluster_ec2" {
 
   provisioner "local-exec" {
     command = <<EOD
-cat <<EOF >> aws_hosts
+cat <<EOF > aws_hosts
+[jenkins]
+${aws_instance.jenkins_hygieia_ec2.public_ip}
 [k8s]
 ${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
