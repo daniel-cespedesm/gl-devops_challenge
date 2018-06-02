@@ -46,3 +46,8 @@
         name: java
         link: /usr/bin/java
         path: /usr/lib/jvm/java-1.8.0/bin/java
+    - name: Git clone
+      git:
+        repo: https://github.com/capitalone/Hygieia.git
+        dest: /opt/Hygieia
+        clone: yes
