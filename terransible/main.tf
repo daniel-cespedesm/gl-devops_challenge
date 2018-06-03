@@ -176,7 +176,7 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins_hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts jenkins-docker.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins_hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts jenkins-docker.yml && ansible-playbook -i aws_hosts hygieia.yml"
   }
 }
 
@@ -197,13 +197,13 @@ resource "aws_instance" "k8s_cluster_ec2" {
   provisioner "local-exec" {
     command = <<EOD
 cat <<EOF >> aws_hosts
-[k8s]
+[jenkins]
 ${aws_instance.k8s_cluster_ec2.public_ip}
 EOF
 EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.k8s_cluster_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts k8s_cluster.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.k8s_cluster_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts jenkins-docker.yml && ansible-playbook -i aws_hosts hygieia.yml"
   }
 }
