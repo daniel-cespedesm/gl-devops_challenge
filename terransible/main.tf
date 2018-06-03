@@ -89,30 +89,30 @@ resource "aws_security_group" "jenkins_hygieia_env_public_sg" {
 
   #jenkins_hygieia
 
-  ingress {
+  /*ingress {
     from_port   = 8081
     to_port     = 8081
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+  }*/
 
   #Hygieia
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   #Ssh
 
-  ingress {
+/*  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+  }*/
 
   egress {
     from_port   = 0
@@ -176,7 +176,7 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins_hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts jenkins-docker.yml && ansible-playbook -i aws_hosts hygieia.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.jenkins_hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts hygieia.yml"
   }
 }
 
@@ -204,6 +204,6 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.k8s_cluster_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts jenkins-docker.yml && ansible-playbook -i aws_hosts hygieia.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.k8s_cluster_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts hygieia.yml"
   }
 }
