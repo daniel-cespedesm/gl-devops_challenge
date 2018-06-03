@@ -56,4 +56,4 @@
 
 
 
-> db.createUser({user:"dashboarduser",pwd:"mongo", roles:[{role:"readWrite", db:"dashboard"}]})
+#> db.createUser({user:"dashboarduser",pwd:"mongo", roles:[{role:"readWrite", db:"dashboard"}]})
