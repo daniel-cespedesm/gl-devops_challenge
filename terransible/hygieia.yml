@@ -49,5 +49,11 @@
     - name: Git clone
       git:
         repo: https://github.com/capitalone/Hygieia.git
-        dest: /opt/Hygieia
+        dest: ~/Hygieia
         clone: yes
+      become: no
+
+
+
+
+> db.createUser({user:"dashboarduser",pwd:"mongo", roles:[{role:"readWrite", db:"dashboard"}]})
