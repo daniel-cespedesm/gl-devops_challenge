@@ -69,3 +69,5 @@ pam-auth
 ldap
 email-ext
 pipeline-maven
+swarm
+docker-build-publish

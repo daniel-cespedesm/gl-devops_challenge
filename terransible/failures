@@ -1,0 +1,111 @@
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] com.capitalone.dashboard:Hygieia 2.0.5-SNAPSHOT .... SUCCESS [  6.397 s]
+[INFO] com.capitalone.dashboard:core ...................... SUCCESS [01:05 min]
+[INFO] com.capitalone.dashboard:api ....................... SUCCESS [ 39.140 s]
+[INFO] com.capitalone.dashboard:api-audit ................. SUCCESS [ 17.680 s]
+[INFO] com.capitalone.dashboard:rally-collector ........... SUCCESS [  7.345 s]
+[INFO] com.capitalone.dashboard:artifactory-artifact-collector SUCCESS [  5.605 s]
+[INFO] com.capitalone.dashboard:bamboo-build-collector .... SUCCESS [  6.012 s]
+[INFO] com.capitalone.dashboard:jenkins-build-collector ... SUCCESS [  6.912 s]
+[INFO] com.capitalone.dashboard:jenkins-cucumber-test-collector SUCCESS [  5.251 s]
+[INFO] com.capitalone.dashboard:jenkins-codequality ....... SUCCESS [  9.528 s]
+[INFO] com.capitalone.dashboard:sonar-codequality-collector SUCCESS [  6.109 s]
+[INFO] com.capitalone.dashboard:aws-cloud-collector ....... SUCCESS [  4.904 s]
+[INFO] com.capitalone.dashboard:udeploy-deployment-collector SUCCESS [  6.962 s]
+[INFO] com.capitalone.dashboard:xldeploy-deployment-collector SUCCESS [  5.537 s]
+[INFO] com.capitalone.dashboard:jira-feature-collector .... SUCCESS [ 17.172 s]
+[INFO] com.capitalone.dashboard:versionone-feature-collector SUCCESS [  5.553 s]
+[INFO] com.capitalone.dashboard:gitlab-feature-collector .. SUCCESS [  8.951 s]
+[INFO] com.capitalone.dashboard:chat-ops-collector ........ SUCCESS [  1.655 s]
+[INFO] com.capitalone.dashboard:appdynamics-performance-collector SUCCESS [  7.811 s]
+[INFO] com.capitalone.dashboard:bitbucket-scm-collector ... SUCCESS [  5.793 s]
+[INFO] com.capitalone.dashboard:github-scm-collector ...... SUCCESS [  6.538 s]
+[INFO] com.capitalone.dashboard:github-graphql-scm-collector SUCCESS [  7.229 s]
+[INFO] com.capitalone.dashboard:subversion-collector ...... SUCCESS [  2.554 s]
+[INFO] com.capitalone.dashboard:gitlab-scm-collector ...... SUCCESS [  6.980 s]
+[INFO] com.capitalone.dashboard:hpsm-cmdb-collector ....... SUCCESS [  6.107 s]
+[INFO] com.capitalone.dashboard:nexus-iq-collector ........ SUCCESS [  6.877 s]
+[INFO] com.capitalone.dashboard:score-collector ........... SUCCESS [  9.608 s]
+[INFO] Hygieia Publisher Plugin ........................... SUCCESS [02:20 min]
+[INFO] com.capitalone.dashboard:UI ........................ FAILURE [ 17.040 s]
+[INFO] com.capitalone.dashboard:ui-tests 2.0.5-SNAPSHOT ... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 08:07 min
+[INFO] Finished at: 2018-06-03T18:31:57Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.github.eirslett:frontend-maven-plugin:0.0.29:npm (npm install) on project UI: Failed to run task: 'npm install --ignore-scripts' failed. (error code 137) -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :UI
+
+
+mvn clean install package -rf :UI
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] com.capitalone.dashboard:UI 2.0.5-SNAPSHOT ......... SUCCESS [01:36 min]
+[INFO] com.capitalone.dashboard:ui-tests 2.0.5-SNAPSHOT ... SUCCESS [ 14.231 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:55 min
+[INFO] Finished at: 2018-06-03T18:41:30Z
+[INFO] ------------------------------------------------------------------------
+
+#################################################################################################################
+
+----------------  NPM VERSION 6.1.0 -------------------
+[INFO] --- frontend-maven-plugin:0.0.29:npm (npm install) @ UI ---
+[INFO] Found proxies: []
+[INFO] Running 'npm install --ignore-scripts' in /home/ec2-user/Hygieia/UI
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] com.capitalone.dashboard:Hygieia 2.0.5-SNAPSHOT .... SUCCESS [  1.948 s]
+[INFO] com.capitalone.dashboard:core ...................... SUCCESS [ 53.850 s]
+[INFO] com.capitalone.dashboard:api ....................... SUCCESS [ 35.284 s]
+[INFO] com.capitalone.dashboard:api-audit ................. SUCCESS [ 15.459 s]
+[INFO] com.capitalone.dashboard:rally-collector ........... SUCCESS [  6.300 s]
+[INFO] com.capitalone.dashboard:artifactory-artifact-collector SUCCESS [  5.486 s]
+[INFO] com.capitalone.dashboard:bamboo-build-collector .... SUCCESS [  6.000 s]
+[INFO] com.capitalone.dashboard:jenkins-build-collector ... SUCCESS [  7.560 s]
+[INFO] com.capitalone.dashboard:jenkins-cucumber-test-collector SUCCESS [  5.376 s]
+[INFO] com.capitalone.dashboard:jenkins-codequality ....... SUCCESS [  8.814 s]
+[INFO] com.capitalone.dashboard:sonar-codequality-collector SUCCESS [  5.794 s]
+[INFO] com.capitalone.dashboard:aws-cloud-collector ....... SUCCESS [  3.718 s]
+[INFO] com.capitalone.dashboard:udeploy-deployment-collector SUCCESS [  5.823 s]
+[INFO] com.capitalone.dashboard:xldeploy-deployment-collector SUCCESS [  5.334 s]
+[INFO] com.capitalone.dashboard:jira-feature-collector .... SUCCESS [ 16.766 s]
+[INFO] com.capitalone.dashboard:versionone-feature-collector SUCCESS [  5.343 s]
+[INFO] com.capitalone.dashboard:gitlab-feature-collector .. SUCCESS [  8.229 s]
+[INFO] com.capitalone.dashboard:chat-ops-collector ........ SUCCESS [  1.460 s]
+[INFO] com.capitalone.dashboard:appdynamics-performance-collector SUCCESS [  6.346 s]
+[INFO] com.capitalone.dashboard:bitbucket-scm-collector ... SUCCESS [  5.437 s]
+[INFO] com.capitalone.dashboard:github-scm-collector ...... SUCCESS [  6.055 s]
+[INFO] com.capitalone.dashboard:github-graphql-scm-collector SUCCESS [  7.690 s]
+[INFO] com.capitalone.dashboard:subversion-collector ...... SUCCESS [  2.181 s]
+[INFO] com.capitalone.dashboard:gitlab-scm-collector ...... SUCCESS [  6.871 s]
+[INFO] com.capitalone.dashboard:hpsm-cmdb-collector ....... SUCCESS [  5.937 s]
+[INFO] com.capitalone.dashboard:nexus-iq-collector ........ SUCCESS [  5.307 s]
+[INFO] com.capitalone.dashboard:score-collector ........... SUCCESS [  9.546 s]
+[INFO] Hygieia Publisher Plugin ........................... SUCCESS [01:14 min]
+[INFO] com.capitalone.dashboard:UI ........................ FAILURE [ 23.721 s]
+[INFO] com.capitalone.dashboard:ui-tests 2.0.5-SNAPSHOT ... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 05:57 min
+[INFO] Finished at: 2018-06-03T19:35:07Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.github.eirslett:frontend-maven-plugin:0.0.29:npm (npm install) on project UI: Failed to run task: 'npm install --ignore-scripts' failed. (error code 137) -> [Help 1]
