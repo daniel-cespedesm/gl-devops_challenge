@@ -184,7 +184,7 @@ EOD
   }
 }
 
-#K8s ec2
+#Hygieia ec2
 
 resource "aws_instance" "hygieia_ec2" {
   instance_type = "${var.ec2_instance_type}"
