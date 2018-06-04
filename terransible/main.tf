@@ -159,11 +159,6 @@ resource "aws_instance" "jenkins_ec2" {
   ami           = "${var.ec2_ami}"
   private_ip = "10.0.0.7"
 
-  root_block_device {
-        volume_size = 30
-    }
-
-
   tags {
     Name = "jenkins_ec2"
   }
