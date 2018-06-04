@@ -204,7 +204,8 @@ resource "aws_instance" "hygieia_ec2" {
 
   provisioner "local-exec" {
     command = <<EOD
-cat <<EOF >> aws_hosts
+cat <<EOF > aws_hosts
+# AWS infrastructure hosts
 [hygieia]
 ${aws_instance.hygieia_ec2.public_ip}
 EOF
