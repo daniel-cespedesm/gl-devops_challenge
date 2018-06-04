@@ -26,4 +26,4 @@
     - name: Jenkins home exists
       file: path=/var/jenkins_home state=directory
     - name: Run Jenkins instance
-      command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home -v /home/ec2-user/.ssh:/root/.ssh 40438238d08c dacesmo/jenkins
+      command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home dacesmo/jenkins
