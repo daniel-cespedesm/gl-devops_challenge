@@ -47,7 +47,7 @@
         link: /usr/bin/java
         path: /usr/lib/jvm/java-1.8.0/bin/java
     - name: Get Docker-Compose
-      command: curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+      shell: "curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
     - name: Set permissions to docker-compose
       command: chmod +x /usr/local/bin/docker-compose
     - name: add ec2-user to docker group
