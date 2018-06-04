@@ -51,3 +51,15 @@ Also you need a github account and if you want to modify the Jenkins build and s
 
 ## Hygieia
 - Hygieia will be deployed dockerized and be ready by jenkins, currently only the application deploy will work as functions customizations aren't implemented in Jenkins as pipelines.
+
+  Hygieia is built out of a forked repository in github:
+    - original hygieia repo: https://github.com/capitalone/Hygieia
+    - forked repository: https://github.com/daniel-cespedesm/Hygieia)
+
+  In the forked repository there is a Jenkinsfile_main acting as the orchestrator to make the build, docker and startup actually happen.
+
+# Author
+This repo is owned by Daniel Céspedes and was created exclusively for a DevOps Challenge for Gorilla Logic . Unless Gorilla Logic has additional privacy policies not documented in this document but found in https://gorillalogic.com/ or any other place, you can do whatever you want with this project as all the components are open-source or free to use.
+
+# Disclaimer
+The author is not responsible of any wrongful usage given to this. Other than that please remember Hygieia is a t2.small aws instance and can actually apply charges to your billing.
