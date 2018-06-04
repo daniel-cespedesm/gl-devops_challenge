@@ -189,7 +189,7 @@ resource "aws_instance" "hygieia_ec2" {
   private_ip = "10.0.0.14"
 
   root_block_device {
-        volume_size = 30
+        volume_size = 25
     }
 
   tags {
