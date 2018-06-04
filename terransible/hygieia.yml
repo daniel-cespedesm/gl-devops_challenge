@@ -81,7 +81,7 @@
         mode: 0700
       become: no
     - name: Create Jenkins node
-      command: cat config.xml | java -jar /home/ec2-user/bin/jenkins-cli.jar -s http://{{ jenkins_master }}:8081 create-node Hygieia-node --username gorilla --password GorillaLogic
+      shell: "java -jar /home/ec2-user/bin/jenkins-cli.jar -s http://{{ jenkins_master }}:8081 create-node Hygieia-node --username gorilla --password GorillaLogic < config.xml"
     - name: Retrieve agent jar
       get_url:
         url: http://{{ jenkins_master }}:8081/jnlpJars/agent.jar
@@ -89,14 +89,14 @@
         mode: 0700
       become: no
     - name: Add Jenkins node
-      command: java -jar /home/ec2-user/bin/agent.jar -jnlpUrl http://{{ jenkins_master }}:8081/computer/Hygieia-node/slave-agent.jnlp -jnlpCredentials gorilla:GorillaLogic &
+      shell: java -jar /home/ec2-user/bin/agent.jar -jnlpUrl http://{{ jenkins_master }}:8081/computer/Hygieia-node/slave-agent.jnlp -jnlpCredentials gorilla:GorillaLogic &
       async: 99999999999
       poll: 0
       become: no
     - name: Create pipeline job
-      command: java -jar /home/ec2-user/jenkins-cli.jar -s http://{{ jenkins_master }}:8081/ create-job jobtest --username gorilla --password GorillaLogic < jobtest.xml
+      shell: java -jar /home/ec2-user/jenkins-cli.jar -s http://{{ jenkins_master }}:8081/ create-job jobtest --username gorilla --password GorillaLogic < jobtest.xml
       become: no
     - name: Build pipeline job
-      command: java -jar /home/ec2-user/jenkins-cli.jar -s http://{{ jenkins_master }}:8081/ build jobtest --username gorilla --password GorillaLogic
+      shell: java -jar /home/ec2-user/jenkins-cli.jar -s http://{{ jenkins_master }}:8081/ build jobtest --username gorilla --password GorillaLogic
       become: no
 #> db.createUser({user:"dashboarduser",pwd:"mongo", roles:[{role:"readWrite", db:"dashboard"}]})
