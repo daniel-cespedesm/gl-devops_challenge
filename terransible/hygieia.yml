@@ -64,7 +64,7 @@
         - jenkins_home
       become: no
     - name: Copy Jenkins conf files
-      fetch: src=/root/gl-devops_challenge/terransible/jenkins_files/{{ item }} dest=/home/ec2-user/jenkins_files
+      copy: src=/root/gl-devops_challenge/terransible/jenkins_files/{{ item }} dest=/home/ec2-user/jenkins_files
       with_items:
         - hygieia-node.xml
         - hygieia-workflow.xml
