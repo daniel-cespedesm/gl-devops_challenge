@@ -157,10 +157,12 @@ resource "aws_key_pair" "gorilla_logic_challenge_auth" {
 resource "aws_instance" "jenkins_ec2" {
   instance_type = "${var.ec2_instance_type}"
   ami           = "${var.ec2_ami}"
+  private_ip = "10.0.0.7"
 
   root_block_device {
         volume_size = 30
     }
+
 
   tags {
     Name = "jenkins_ec2"
@@ -189,6 +191,7 @@ EOD
 resource "aws_instance" "hygieia_ec2" {
   instance_type = "${var.ec2_instance_type}"
   ami           = "${var.ec2_ami}"
+  private_ip = "10.0.0.14"
 
   root_block_device {
         volume_size = 30
@@ -204,7 +207,7 @@ resource "aws_instance" "hygieia_ec2" {
 
   provisioner "local-exec" {
     command = <<EOD
-cat <<EOF > aws_hosts
+cat <<EOF >> aws_hosts
 # AWS infrastructure hosts
 [hygieia]
 ${aws_instance.hygieia_ec2.public_ip}
@@ -213,6 +216,6 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts -e \"jenkins_master=${aws_instance.jenkins_ec2.public_ip}\" hygieia.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts -e 'jenkins_master=10.0.0.7' hygieia.yml"
   }
 }
