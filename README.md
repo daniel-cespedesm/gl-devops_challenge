@@ -58,6 +58,9 @@ Also you need a github account and if you want to modify the Jenkins build and s
 
   In the forked repository there is a Jenkinsfile_main acting as the orchestrator to make the build, docker and startup actually happen.
 
+  ## Functionality
+    - Due to the lack of knowledge on configuring Hygieia, it is very probable that the application does not work as expected or the components don't get to connect between each other.
+
 # Author
 This repo is owned by Daniel Céspedes and was created exclusively for a DevOps Challenge for Gorilla Logic . Unless Gorilla Logic has additional privacy policies not documented in this document but found in https://gorillalogic.com/ or any other place, you can do whatever you want with this project as all the components are open-source or free to use.
 
