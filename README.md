@@ -1,4 +1,8 @@
 # gl-devops_challenge
+
+This repository deppends on 2 additional repositories:
+https://github.com/daniel-cespedesm/Hygieia and https://hub.docker.com/r/dacesmo/jenkins/
+
 Before start you should have access to an aws account (charges will apply due to the type of machines selected for deployment, however, they can be changed in the terraform.tfvars file, but then Hygieia application will not even be built)
 
 You also need a user setup with programmatic access in AWS which for this scenario is called "gorilla"
@@ -59,7 +63,8 @@ Also you need a github account and if you want to modify the Jenkins build and s
   In the forked repository there is a Jenkinsfile_main acting as the orchestrator to make the build, docker and startup actually happen.
 
   ## Functionality
-    - Due to the lack of knowledge on configuring Hygieia, it is very probable that the application does not work as expected or the components don't get to connect between each other.
+    - Due to the lack of knowledge on configuring Hygieia, it is very probable that the application does not work as expected or the components don't get to connect between each other. Last time app went up it failed.
+    - Only 2 components are being started as when the rest are removed the application tends to connect api-ui-db successfully. If you wish to make test adding components they are being built, you just have to uncomment the components in the docker-compose.yml file and add additional settings to the docker-compose.override.yml
 
 # Author
 This repo is owned by Daniel Céspedes and was created exclusively for a DevOps Challenge for Gorilla Logic . Unless Gorilla Logic has additional privacy policies not documented in this document but found in https://gorillalogic.com/ or any other place, you can do whatever you want with this project as all the components are open-source or free to use.
