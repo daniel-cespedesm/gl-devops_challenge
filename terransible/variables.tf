@@ -8,6 +8,7 @@ variable "cidrs" {
 }
 
 variable "ec2_instance_type" {}
+variable "ec2_instance_type_hygieia" {}
 variable "ec2_ami" {}
 variable "public_key_path" {}
 variable "key_name" {}

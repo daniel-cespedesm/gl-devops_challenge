@@ -37,7 +37,7 @@ resource "aws_route_table" "gorilla_logic_challenge_public_rt" {
   }
 
   tags {
-    Name = "jenkins_public"
+    Name = "gorilla_logic_challenge_public"
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_subnet" "gorilla_logic_challenge_public1_subnet" {
   availability_zone       = "${data.aws_availability_zones.available.names[0]}"
 
   tags {
-    Name = "jenkins_public1"
+    Name = "gorilla_logic_challenge_public1"
   }
 }
 
@@ -189,7 +189,7 @@ EOD
 #Hygieia ec2
 
 resource "aws_instance" "hygieia_ec2" {
-  instance_type = "${var.ec2_instance_type}"
+  instance_type = "${var.ec2_instance_type_hygieia}"
   ami           = "${var.ec2_ami}"
   private_ip = "10.0.0.14"
 
