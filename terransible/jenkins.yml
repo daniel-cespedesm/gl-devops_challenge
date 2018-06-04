@@ -20,17 +20,10 @@
         warn: no
     - name: Docker is started now and at boot.
       service: name=docker state=started enabled=yes
-    - name: Removes docker repo
-      file: path=/etc/yum.repos.d/docker.repo state=absent
-    - name: get docker running container ids
-      command: docker ps -q
-      register: containers_ids
-    - name: Kills docker containers if any
-      command: docker kill {{ containers_ids.stdout }}
       ignore_errors: yes
     - name: Pull Jenkins docker image
       command: docker pull dacesmo/jenkins
     - name: Jenkins home exists
       file: path=/var/jenkins_home state=directory
     - name: Run Jenkins instance
-      command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home dacesmo/jenkins
+      command: docker run -d -u root -p 8081:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home -v /home/ec2-user/.ssh:/root/.ssh 40438238d08c dacesmo/jenkins

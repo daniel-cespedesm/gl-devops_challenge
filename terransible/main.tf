@@ -212,6 +212,6 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts hygieia.yml"
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.hygieia_ec2.id} --profile ${var.aws_profile} && export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i aws_hosts -e \"jenkins_master=${aws_instance.jenkins_ec2.public_ip}\" hygieia.yml"
   }
 }
