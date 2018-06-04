@@ -69,8 +69,8 @@
         - hygieia-node.xml
         - hygieia-workflow.xml
       become: no
-    - name: Wait for jenkins
-      shell: "until $(curl --output /dev/null --silent --head --fail http://{{ jenkins_master }}:myport); do printf '.'; sleep 5s; done;"
+    # - name: Wait for jenkins
+      # shell: "until $(curl --output /dev/null --silent --head --fail http://{{ jenkins_master }}:myport); do printf '.'; sleep 5s; done;"
     - name: Create jar executables folder
       file: path=/home/ec2-user/bin/ state=directory
       become: no
