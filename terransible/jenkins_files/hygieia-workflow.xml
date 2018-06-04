@@ -18,6 +18,16 @@
         </org.jenkinsci.plugins.pipeline.maven.trigger.WorkflowJobDependencyTrigger>
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>DOCKER_HOST</name>
+          <description>Docker host value</description>
+          <defaultValue>127.0.0.1:2375</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.0">
       <projectUrl>https://github.com/daniel-cespedesm/Hygieia/</projectUrl>
       <displayName></displayName>

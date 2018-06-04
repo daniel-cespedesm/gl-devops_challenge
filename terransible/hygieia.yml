@@ -55,6 +55,12 @@
         name: ec2-user
         groups: docker
         append: yes
+    - name: Change Docker default port to 127.0.0.1:2375
+      lineinfile:
+        dest: /usr/lib/systemd/system/docker.service
+        regexp: 'ExecStart=/usr/bin/dockerd'
+        line: 'ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock'
+        backrefs: yes
     - name: Docker is started now and at boot.
       service: name=docker state=started enabled=yes
     - name: Create jenkins_files and jenkins_home folders
