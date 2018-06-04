@@ -24,11 +24,6 @@
       service: name=docker state=started enabled=yes
     - name: Removes docker repo
       file: path=/etc/yum.repos.d/docker.repo state=absent
-    #- name: Download Kompose
-    #  get_url:
-    #    url: https://github.com/kubernetes/kompose/releases/download/v1.13.0/kompose-linux-amd64
-    #    dest: /usr/local/bin/kompose
-    #    mode: 0755
     - name: Adds mvn folder
       file: path=/usr/lib/mvn/ state=directory
     - name: Gets Maven installed
@@ -77,8 +72,6 @@
         - hygieia-node.xml
         - hygieia-workflow.xml
       become: no
-    # - name: Create Jenkins node
-    #   shell: "java -jar /home/ec2-user/bin/jenkins-cli.jar -s http://{{ jenkins_master }}:8081 help --username gorilla --password GorillaLogic"
     - name: Wake up Jenkins
       get_url:
         url: ttp://{{ jenkins_master }}:8081/
@@ -114,4 +107,3 @@
     - name: Build pipeline job
       shell: "java -jar /home/ec2-user/bin/jenkins-cli.jar -s http://{{ jenkins_master }}:8081/ build hygieia_workflow --username gorilla --password GorillaLogic"
       become: no
-#> db.createUser({user:"dashboarduser",pwd:"mongo", roles:[{role:"readWrite", db:"dashboard"}]})
