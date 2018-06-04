@@ -61,6 +61,8 @@
         regexp: 'ExecStart=/usr/bin/dockerd'
         line: 'ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock'
         backrefs: yes
+    - name: Reread docker config
+      systemd: daemon_reload=yes
     - name: Docker is started now and at boot.
       service: name=docker state=started enabled=yes
     - name: Create jenkins_files and jenkins_home folders
