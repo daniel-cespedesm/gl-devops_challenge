@@ -71,6 +71,11 @@
       become: no
     # - name: Create Jenkins node
     #   shell: "java -jar /home/ec2-user/bin/jenkins-cli.jar -s http://{{ jenkins_master }}:8081 help --username gorilla --password GorillaLogic"
+    - name: Wake up Jenkins
+      get_url:
+        url: ttp://{{ jenkins_master }}:8081/
+        dest: /tmp/
+      ignore_errors: yes
     - name: Taking 45 secs of grace for Jenkins sake
       command: sleep 45s
     - name: Create jar executables folder
