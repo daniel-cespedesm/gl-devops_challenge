@@ -29,6 +29,7 @@ Also you need a github account and if you want to modify the Jenkins build and s
   - Download this repo complete
   - Set up your AWS account using the aws-cli
 
+## Deploy Hygieia
 - Once you are ready to start the deployment go to folder gl-devops_challenge/terransible and perform the following commands as root:
 
       # Init the SSH Keys
@@ -44,3 +45,9 @@ Also you need a github account and if you want to modify the Jenkins build and s
       terraform apply gorilla_logic_challenge_plan
 
     The above commands will execute file gl-devops_challenge/terransible/main.tf which will deploy the required aws infrastructure to get 2 aws_ec2 instances, a free t2.micro to host the Jenkins master server, and a paid t2.small to act as a Jenkins slave which will build, dockerize and deploy the Hygieia application and all of its components found in https://github.com/daniel-cespedesm/Hygieia using the Jenkinsfile_main file found in the forked repository.
+
+## Jenkins Orchestration
+- Once the deployment is done you will find an aws_hosts file with the respective public ips for the jenkins and hygieia hosts, jenkins wil be accessible in port 8081 and will use username and password gorilla:GorillaLogic to authenticate.
+
+## Hygieia
+- Hygieia will be deployed dockerized and be ready by jenkins, currently only the application deploy will work as functions customizations aren't implemented in Jenkins as pipelines.

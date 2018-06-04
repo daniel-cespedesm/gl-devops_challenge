@@ -29,19 +29,8 @@ done
 
 UPDATE=$(echo $UPDATE | tr '[:lower:]' '[:upper:]')
 
-if [ ($UPDATE != "YES") &&  ($UPDATE != "NO") ]
-then
-  $ECHO "$UPDATE value is not valid for flag -u|--update, exiting.";
-  exit 2;
-fi;
-
-function update_os () {
-  if [ $UPDATE == "YES" ]
-  then
-    /bin/yum clean all -y;
-    /bin/yum update -y;
-  fi;
-}
+/bin/yum clean all -y;
+/bin/yum update -y;
 
 function install_dependencies () {
   $AUTOYUM python-pip;
@@ -59,7 +48,7 @@ function setup_terraform () {
   $TERRAFORM --version;
 }
 
-function setup_ssh_keys () {}
+function setup_ssh_keys () {
   /bin/ssh-keygen -f ~/.ssh/fruit -q -N ""
   /bin/chmod 0600 ~/.ssh/fruit*
   eval `ssh-agent -s`
