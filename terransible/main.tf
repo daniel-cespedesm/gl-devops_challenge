@@ -7,8 +7,6 @@ provider "aws" {
 
 resource "aws_vpc" "gorilla_logic_challenge_vpc" {
   cidr_block           = "${var.vpc_cidr}"
-/*  enable_dns_hostnames = false
-  enable_dns_support   = false*/
 
   tags {
     Name = "gorilla_logic_challenge_vpc"
@@ -189,7 +187,7 @@ resource "aws_instance" "hygieia_ec2" {
   private_ip = "10.0.0.14"
 
   root_block_device {
-        volume_size = 25
+        volume_size = 20
     }
 
   tags {

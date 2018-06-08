@@ -3,6 +3,16 @@
   become: yes
   remote_user: ec2-user
   tasks:
+    - name: Creates the file to be used for swap
+      command: dd if=/dev/zero of=/mnt/2GB.swap bs=2048 count=1048576
+    - name: Formats the file for swap
+      command: mkswap /mnt/2GB.swap
+    - name: Changes swap file permissions
+      file: path=/mnt/2GB.swap owner=root group=root mode=0600
+    - name: Add the file to the system as a swap file
+      command: swapon /mnt/2GB.swap
+    - name: Writes swap entry in fstab
+      mount: name=none src=/mnt/2GB.swap fstype=swap opts=sw passno=0 dump=0 state=present
     - name: Makes sure OS is up to date
       yum:  name=* state=latest
     - name: Docker dependencies and others
