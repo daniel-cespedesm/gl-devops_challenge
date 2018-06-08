@@ -89,8 +89,8 @@
         url: ttp://{{ jenkins_master }}:8081/
         dest: /tmp/
       ignore_errors: yes
-    - name: Taking 45 secs of grace for Jenkins sake
-      command: sleep 45s
+    # - name: Taking 45 secs of grace for Jenkins sake
+    #   command: sleep 45s
     - name: Create jar executables folder
       file: path=/home/ec2-user/bin/ state=directory
       become: no
